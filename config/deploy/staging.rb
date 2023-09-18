@@ -7,9 +7,9 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-set :branch, 'legacy-develop'
-set :staging_ip, '<SET THE IP ADDRESS HERE>'
-set :staging_key_path, '<SET THE ABSOLUTE KEY PATH HERE>'
+set :branch, 'RDP-30318-ec2-downsize'
+set :staging_ip, '34.232.151.154'
+set :staging_key_path, '/Users/sausharma/Keys/cortex-stage-saurabh.pem'
 server fetch(:staging_ip),
        user: 'ubuntu',
        roles: %w{app db web},
