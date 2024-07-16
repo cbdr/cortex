@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
+gem 'bundler', '=2.3.26'
 
+gem 'dotenv', '~> 2.6', '>= 2.6.0'
+gem 'dotenv-rails'
 # Dependency Management
 gem 'bower-rails', '~> 0.11.0'
 
@@ -15,14 +18,14 @@ gem 'cortex-exceptions', '= 0.0.4'
 gem 'cortex-plugins-core', '= 0.12.4'
 
 # API
-gem 'grape', '~> 0.19.2'
-gem 'grape-entity', '~> 0.6.1'
-gem 'grape-swagger', '~> 0.27.3'
-gem 'grape-swagger-entity', '~> 0.2.1'
+gem 'grape', github: 'saurabh-sharma-cb/grape-cortex', branch: 'v1.5.3-grape-cortex'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
 
 # Authorization
 gem 'six', '~> 0.2.0'
-gem 'devise', '~> 4.2.1'
+gem 'devise', '~> 4.8.1'
 gem 'rack-oauth2', '~> 1.6.1'
 gem 'doorkeeper', '~> 4.2'
 gem 'rolify', '~> 5.1'
@@ -55,6 +58,7 @@ gem 'rack-cors', '~> 0.4.1', require: 'rack/cors'
 gem 'excon', '~> 0.55.0'
 gem 'hashie', '~> 3.5.5'
 gem 'hashr', '~> 2.0.1'
+gem 'mimemagic', '~> 0.3.9'
 gem 'mime-types', '~> 3.1.0'
 gem 'interactor-rails', '~> 2.0'
 gem 'virtus', '~> 1.0.5'
@@ -108,6 +112,8 @@ gem 'dialog-polyfill-rails', '~> 0.4.5'
 gem 'flipper', '< 0.11'
 gem 'flipper-ui', '< 0.11'
 gem 'flipper-active_record', '< 0.11'
+gem 'foreman'
+gem 'thin'
 
 group :tasks do
   # Parsing
@@ -116,8 +122,7 @@ end
 
 group :test, :development do
   # Environment
-  gem 'dotenv-rails', :require => 'dotenv/rails-now'
-  gem 'foreman'
+  # gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
   # Cache/Sidekiq
   gem 'redis-namespace'
@@ -182,4 +187,16 @@ group :staging, :production do
 
   # Performance
   gem 'bootscale', require: false
+end
+
+group :development do
+  gem 'capistrano', '~> 3.10', require: false
+  gem 'capistrano-rails', '~> 1.3', require: false
+  gem 'ed25519', '~> 1.3'
+  gem 'bcrypt_pbkdf', '~> 1.1'
+  gem 'rvm1-capistrano3', require: false
+  gem 'capistrano-npm'
+  gem 'capistrano-thin', '~> 2.0.0'
+  # Environment variable autoload from .env
+  # gem 'dotenv', '~> 2.6', '>= 2.6.0'
 end

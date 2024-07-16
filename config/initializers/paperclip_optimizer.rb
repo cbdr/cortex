@@ -17,10 +17,11 @@ Paperclip::PaperclipOptimizer.default_options = {
   optipng: false,
   pngcrush: false,
   pngout: false,
+  oxipng: false,
   pngquant: {
     allow_lossy: true,
     quality: 33..50,
     speed: 3
   },
-  svgo: false
+  svgo: false  
 }

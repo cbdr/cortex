@@ -175,21 +175,31 @@ The admin interface should now be accessible locally on port `3000`. To access C
 
 ### Deployment
 
-To use an automated tool to deploy the server, set this environmental variable:
+Capistrano is used to deploy the application.
+It requires the IP address for the server and the pem keyfile for access.
+Following configuration is required:
 
-```shell
-CI=true
+1. Edit 'config/deploy/staging.rb' and set the following values:
+```
+set :staging_ip, '<SET THE IP ADDRESS HERE>'
+set :staging_key_path, '<SET THE ABSOLUTE KEY PATH HERE>'
+```
+2. Capistrano commands mini-cheatsheet
+```
+# Deploy the application
+cap staging deploy
+
+# Restart thin web-server
+cap staging thin:restart
+
+# Restart Sidekiq
+cap staging sidekiq:restart
+
+# Rollback to the previous version
+cap staging deploy:rollback
 ```
 
-This will suppress Bower's interactive request to enable insights/metrics reporting, which normally prevents the CI process from continuing.
-
-Additionally, deploying the `development` environment as a non-local server will require an additional environmental variable be set:
-
-```shell
-DEPLOYED=true
-```
-
-This will configure various things, such as [dotenv](https://github.com/bkeepers/dotenv) to behave normally in a deployed scenario.
+Analogous changes can be done for production environment.
 
 ## Running Test Suite
 

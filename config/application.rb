@@ -17,6 +17,7 @@ module Cortex
     config.active_job.queue_adapter = :sidekiq
     config.assets.image_optim = false
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    config.assets.paths << Rails.root.join('bower_components')
 
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true

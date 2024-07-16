@@ -5,6 +5,7 @@ module V1
 
       resource :webpages do
         include Grape::Kaminari
+        include Grape::Extensions::Hashie::Mash::ParamBuilder
         helpers ::V1::Helpers::WebpagesHelper
         paginate per_page: 25, max_per_page: 1000
 
@@ -70,9 +71,10 @@ module V1
           if params[:seo_keyword_list]
             webpage.seo_keyword_list = params[:seo_keyword_list]
           end
+	  webpage.user = current_user!
 
           webpage.update!(update_params.to_hash)
-          CacheBustWebpageJob.perform_later(webpage.url)
+          CacheBustWebpageJob.perform_now(webpage.url)
 
           present webpage, with: ::V1::Entities::Webpage, full: true
         end
